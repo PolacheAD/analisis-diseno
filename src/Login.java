@@ -31,7 +31,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         registro=new registro();
                 //System.out.println(re.getForeground().getRGB());
-
+        inicio();
     }
   
     registro registro;
@@ -196,13 +196,12 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    public void inicio(){
         con.conectar();
-        sent = "select * from catedratico where usuario = \"" + jTextField1.getText()+"\"";
+        sent = "select * from catedratico where usuario = \"ardavi88\"";
         regreso = con.seleccionar(sent);
         try {
-            if(regreso.getString("pass").equals(String.valueOf(jPasswordField1.getPassword()))){
+            if(regreso.getString("pass").equals("mipanamiguel1")){
                 sesion.setUsuario(regreso.getString("usuario"));
                 sesion.setId_cated(regreso.getInt("id_cated"));
                 sesion.setNombre_cated(regreso.getString("nombre_cated"));
@@ -229,6 +228,10 @@ public class Login extends javax.swing.JFrame {
             jPasswordField1.setText("");
             con.cerrar();
         }   
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void reMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reMouseEntered
@@ -282,7 +285,7 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new Login().setVisible(false);
             }
         });
     }
