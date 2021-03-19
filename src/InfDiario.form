@@ -295,7 +295,11 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Leelawadee UI Semilight" size="14" style="0"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="IS-2000"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
@@ -303,7 +307,10 @@
               <Font name="Leelawadee UI Semilight" size="14" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="0"/>
+              <StringArray count="2">
+                <StringItem index="0" value="Instalaciones Electricas"/>
+                <StringItem index="1" value="Analisis y Diseno"/>
+              </StringArray>
             </Property>
           </Properties>
           <Events>
@@ -338,9 +345,72 @@
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="3" rowCount="20">
-                    <Column editable="false" title="Estudiante" type="java.lang.String"/>
-                    <Column editable="false" title="N&#xb0; Cuenta" type="java.lang.String"/>
-                    <Column editable="false" title="Asistencia" type="java.lang.String"/>
+                    <Column editable="false" title="Estudiante" type="java.lang.String">
+                      <Data value="Abigail Sanchez"/>
+                      <Data value="Arnold  Polanco"/>
+                      <Data value="Astrid"/>
+                      <Data value="Bayron"/>
+                      <Data value="Brenedin"/>
+                      <Data value="Brenedin Gomez"/>
+                      <Data value="Elena"/>
+                      <Data value="Fernando"/>
+                      <Data value="Fredy"/>
+                      <Data value="Jose"/>
+                      <Data value="Juan Perez"/>
+                      <Data value="Paola Garcia"/>
+                      <Data value="Pedro Cruz"/>
+                      <Data value="Ramon"/>
+                      <Data value="Roberto"/>
+                      <Data value="Santiago"/>
+                      <Data value="Selvin"/>
+                      <Data value="Sergio Vasquez"/>
+                      <Data value="Teresa"/>
+                      <Data value="Yorleny Ramos"/>
+                    </Column>
+                    <Column editable="false" title="N&#xb0; Cuenta" type="java.lang.String">
+                      <Data value="45897212"/>
+                      <Data value="36363636"/>
+                      <Data value="45897212"/>
+                      <Data value="20018920"/>
+                      <Data value="20162920"/>
+                      <Data value="94949494"/>
+                      <Data value="45897212"/>
+                      <Data value="45897212"/>
+                      <Data value="20192038"/>
+                      <Data value="42123456"/>
+                      <Data value="24895641"/>
+                      <Data value="48484848"/>
+                      <Data value="45897212"/>
+                      <Data value="20182937"/>
+                      <Data value="65556464"/>
+                      <Data value="20172016"/>
+                      <Data value="56457620"/>
+                      <Data value="58685858"/>
+                      <Data value="20192020"/>
+                      <Data value="25252525"/>
+                    </Column>
+                    <Column editable="false" title="Asistencia" type="java.lang.String">
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="N"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="N"/>
+                      <Data value="N"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                      <Data value="S"/>
+                    </Column>
                   </Table>
                 </Property>
                 <Property name="autoResizeMode" type="int" value="3"/>
@@ -376,6 +446,9 @@
               <Font name="Leelawadee UI Semilight" size="14" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField2ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>

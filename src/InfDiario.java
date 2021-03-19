@@ -1,3 +1,23 @@
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +29,122 @@
  * @author Arnold
  */
 public class InfDiario extends javax.swing.JFrame {
-
+    
+    XSSFWorkbook libro;
+    XSSFSheet sheet;
+    XSSFRow fila;
+    XSSFCell celda;
+    CellStyle style;
+    
+    File abrir;
+    JFileChooser file;
+    DefaultTableModel modelo;
+    LocalDate hoy;
+    int filainicial;
+    int asistencia;
+    int inasistencia;
     /**
      * Creates new form NewJFrame
      */
     public InfDiario() {
         initComponents();
+        hoy = LocalDate.now();
+        jTextField2.setText(hoy.toString());
+    }
+    
+    public XSSFWorkbook crear_libro(){
+        hoy = LocalDate.now();
+        
+        //plantilla del archivo
+        abrir = new File("C:\\Users\\Sergio\\Desktop\\ResDiario.xlsx");
+        try (FileInputStream entrada = new FileInputStream(abrir)){
+            libro= new XSSFWorkbook(entrada);
+            sheet = libro.getSheetAt(0);
+            modelo = (DefaultTableModel) jTable1.getModel();
+            //Estilo de celda
+            style = libro.createCellStyle();
+            style.setBorderTop(BorderStyle.THIN);
+            style.setBorderBottom(BorderStyle.THIN);
+            style.setBorderLeft(BorderStyle.THIN);
+            style.setBorderRight(BorderStyle.THIN);
+            
+            //Escribiendo el contenido de la tabla en el documento
+            
+            //Escribiendo la fecha
+            fila = sheet.getRow(6);
+            celda = fila.getCell(7);
+            celda.setCellValue("Fecha: " + hoy.toString());
+            
+            fila = sheet.getRow(33);
+            celda = fila.getCell(7);
+            celda.setCellValue("Fecha: " + hoy.toString());
+            
+            fila = sheet.getRow(7);
+            celda = fila.getCell(1);
+            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
+            
+            fila = sheet.getRow(37);
+            celda = fila.getCell(2);
+            celda.setCellValue("Fecha: " + hoy.toString());
+            
+            //Obtener Asistencias e Inasistencias
+            asistencia = 0;
+            inasistencia = 0;
+            
+            for(int i=0; i<modelo.getRowCount();i++){
+                if ( String.valueOf(jTable1.getModel().getValueAt(i, 2)).equals("S") ) {
+                    asistencia = asistencia + 1;
+                } else if ( String.valueOf(jTable1.getModel().getValueAt(i, 2)).equals("N") ) {
+                    inasistencia = inasistencia + 1;
+                }
+            }
+            
+            fila = sheet.getRow(11); 
+            celda = fila.getCell(4);
+            celda.setCellValue(Double.parseDouble(String.valueOf(asistencia)));
+            
+            fila = sheet.getRow(12);
+            celda = fila.getCell(4);
+            celda.setCellValue(Double.parseDouble(String.valueOf(inasistencia)));
+            
+            //Modificando la tabla de Inasistentes
+            int cont = 0;
+            for(int i=0; i<modelo.getRowCount();i++){
+                filainicial = 39; //Primera fila de registros de la tabla de excel
+                if ( String.valueOf(jTable1.getModel().getValueAt(i, 2)).equals("N") ) {
+                    fila = sheet.createRow(cont+filainicial);
+                    //Aplicando estilo a celdas
+                    for(int j=2; j<7; j++){
+                        celda = fila.createCell(j);
+                        celda.setCellStyle(style);
+                    }
+                    //Celda No.
+                    celda = fila.getCell(2);
+                    celda.setCellValue(i+1);
+
+                    //Celda Nombre de Alumno
+                    celda = fila.getCell(3);
+                    //Combinar celdas
+                    sheet.addMergedRegion(new CellRangeAddress(cont+filainicial,cont+filainicial,3,4)); 
+                    //(primerafila, ultimafila, primeracolumna, ultimacolumna)
+               
+                    celda.setCellValue(String.valueOf(modelo.getValueAt(i, 0)));
+                    
+                     //Celda NumeroCuenta (IMPORTANTE: Considerar las columnas que abarca la celda combinada anterior)
+                    celda = fila.getCell(5);
+                    sheet.addMergedRegion(new CellRangeAddress(cont+filainicial,cont+filainicial,5,6));
+                    celda.setCellValue(String.valueOf(modelo.getValueAt(i, 1)));
+                    cont++;
+                }
+            }
+            
+            entrada.close(); //Cerrando el FileInputStream
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ListClases.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ListClases.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return libro;
     }
 
     /**
@@ -106,8 +236,15 @@ public class InfDiario extends javax.swing.JFrame {
 
         jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jTextField1.setText("IS-2000");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Instalaciones Electricas", "Analisis y Diseno" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
@@ -121,26 +258,26 @@ public class InfDiario extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {"Abigail Sanchez", "45897212", "S"},
+                {"Arnold  Polanco", "36363636", "S"},
+                {"Astrid", "45897212", "N"},
+                {"Bayron", "20018920", "S"},
+                {"Brenedin", "20162920", "S"},
+                {"Brenedin Gomez", "94949494", "S"},
+                {"Elena", "45897212", "S"},
+                {"Fernando", "45897212", "S"},
+                {"Fredy", "20192038", "S"},
+                {"Jose", "42123456", "S"},
+                {"Juan Perez", "24895641", "S"},
+                {"Paola Garcia", "48484848", "S"},
+                {"Pedro Cruz", "45897212", "S"},
+                {"Ramon", "20182937", "S"},
+                {"Roberto", "65556464", "S"},
+                {"Santiago", "20172016", "N"},
+                {"Selvin", "56457620", "N"},
+                {"Sergio Vasquez", "58685858", "S"},
+                {"Teresa", "20192020", "S"},
+                {"Yorleny Ramos", "25252525", "S"}
             },
             new String [] {
                 "Estudiante", "N° Cuenta", "Asistencia"
@@ -172,6 +309,11 @@ public class InfDiario extends javax.swing.JFrame {
         }
 
         jTextField2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(81, 152, 224));
@@ -324,7 +466,31 @@ public class InfDiario extends javax.swing.JFrame {
 
     private void Boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton1ActionPerformed
         // TODO add your handling code here:
-       
+        file = new JFileChooser();
+        file.showSaveDialog(this);
+        File guardar = file.getSelectedFile();
+        if(guardar!=null){
+            XSSFWorkbook aqui = crear_libro();
+            FileOutputStream fileOuS;
+            try {
+                if(guardar.getPath().contains("xlsx")){
+                     fileOuS= new FileOutputStream(guardar);
+                }else{
+                    fileOuS= new FileOutputStream(guardar+".xlsx");
+                }
+                
+                if (guardar.exists()) {// si el archivo existe se elimina
+                    guardar.delete();
+                    System.out.println("Archivo eliminado");
+		}
+		aqui.write(fileOuS);
+		fileOuS.flush();
+		fileOuS.close();
+		JOptionPane.showMessageDialog(this,"Informe generado con éxito");                
+            } catch (IOException ex) {
+                System.out.println("Error");
+            }
+        }  
     }//GEN-LAST:event_Boton1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -334,6 +500,16 @@ public class InfDiario extends javax.swing.JFrame {
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
 
     }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+        hoy = LocalDate.now();
+        jTextField2.setText(hoy.toString());
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
