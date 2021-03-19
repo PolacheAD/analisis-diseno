@@ -26,13 +26,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Arnold
  */
 public class ListClases extends javax.swing.JFrame {
+    //objetos del excel
     XSSFWorkbook libro;
     XSSFSheet sheet;
     XSSFRow fila;
     XSSFCell celda;
+    CellStyle style;
+    
     File abrir;
     JFileChooser file;
-    CellStyle style;
     DefaultTableModel modelo;
     LocalDate hoy;
     int filainicial;
@@ -46,7 +48,9 @@ public class ListClases extends javax.swing.JFrame {
     
     public XSSFWorkbook crear_libro(){
         hoy = LocalDate.now();
-        abrir = new File("E:\\U\\analisis y diseño\\Proyecto\\ListClases.xlsx");
+        
+        //plantilla del archivo
+        abrir = new File("E:\\U\\analisis y diseño\\ListClases.xlsx");
         try (FileInputStream entrada = new FileInputStream(abrir)){
             libro= new XSSFWorkbook(entrada);
             sheet = libro.getSheetAt(0);
@@ -67,10 +71,10 @@ public class ListClases extends javax.swing.JFrame {
             
             //Modificando la tabla
             for(int i=0; i<modelo.getRowCount();i++){
-                filainicial = 10;
+                filainicial = 10; //Primera fila de registros de la tabla de excel
                 fila = sheet.getRow(i+filainicial);
                 //Aplicando estilo a celdas
-                for(int j=0; j<=7; j++){
+                for(int j=0; j<8; j++){
                     celda = fila.getCell(j);
                     celda.setCellStyle(style);
                 }
@@ -85,7 +89,7 @@ public class ListClases extends javax.swing.JFrame {
                 //(primerafila, ultimafila, primeracolumna, ultimacolumna)
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 0)));
                 
-                //Celda Código
+                //Celda Código (IMPORTANTE: Considerar las columnas que abarca la celda combinada anterior)
                 celda = fila.getCell(5);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 1)));
                 
@@ -95,7 +99,7 @@ public class ListClases extends javax.swing.JFrame {
                 
                 //Celda Número de Estudiantes
                 celda = fila.getCell(7);
-                celda.setCellValue(String.valueOf(modelo.getValueAt(i, 3)));
+                celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(i, 3))));
             }
             entrada.close(); //Cerrando el FileInputStream
         } catch (FileNotFoundException ex) {
