@@ -1,0 +1,345 @@
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFTable;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Arnold
+ */
+public class ResumenPeriodo extends javax.swing.JFrame {
+    XSSFWorkbook libro;
+    XSSFSheet sheet;
+    XSSFRow fila;
+    XSSFCell celda;
+    CellStyle style;
+    
+    File abrir;
+    JFileChooser file;
+    DefaultTableModel modelo;
+    LocalDate hoy;
+    int filainicial;
+    /**
+     * Creates new form ResumenPeriodo
+     */
+    public ResumenPeriodo() {
+        initComponents();
+    }
+    
+    public XSSFWorkbook crear_libro(){
+        hoy = LocalDate.now();
+        
+        //plantilla del archivo
+        abrir = new File("E:\\U\\analisis y diseño\\Proyecto\\ResumenPeriodo.xlsx");
+        try (FileInputStream entrada = new FileInputStream(abrir)){
+            libro= new XSSFWorkbook(entrada);
+            sheet = libro.getSheetAt(0);
+            modelo = (DefaultTableModel) jTable1.getModel();
+            //Estilo de celda
+            style = libro.createCellStyle();
+            style.setBorderTop(BorderStyle.THIN);
+            style.setBorderBottom(BorderStyle.THIN);
+            style.setBorderLeft(BorderStyle.THIN);
+            style.setBorderRight(BorderStyle.THIN);
+            
+            //Escribiendo el contenido de la tabla en el documento
+            
+            //Escribiendo la fecha
+            fila = sheet.getRow(6);
+            celda = fila.getCell(6);
+            celda.setCellValue("Fecha: " + hoy.toString());
+            fila = sheet.getRow(10);
+            //No.
+            celda = fila.getCell(1);
+            celda.setCellValue(1);
+            //Nombre
+            celda = fila.getCell(2);
+            celda.setCellValue(String.valueOf(modelo.getValueAt(0, 0)));
+            //No. Cuenta
+            celda = fila.getCell(4);
+            celda.setCellValue(String.valueOf(modelo.getValueAt(0, 1)));
+            
+            celda = fila.getCell(5);
+            celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(0, 2))));
+            
+            celda = fila.getCell(6);
+            celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(0, 3))));
+            
+            celda = fila.getCell(7);
+            celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(0, 4))));
+            
+            fila = sheet.createRow(11);
+            fila.setRowNum(15);
+            /*
+            //Modificando la tabla
+            for(int i=0; i<modelo.getRowCount();i++){
+                filainicial = 10; //Primera fila de registros de la tabla de excel
+                fila = sheet.getRow(i+filainicial);
+                //Aplicando estilo a celdas
+                for(int j=0; j<8; j++){
+                    celda = fila.getCell(j);
+                    celda.setCellStyle(style);
+                }
+                //Celda No.
+                celda = fila.getCell(0);
+                celda.setCellValue(i+1);
+                
+                //Celda Nombre de la Clase
+                celda = fila.getCell(1);
+                //Combinar celdas
+                sheet.addMergedRegion(new CellRangeAddress(i+filainicial,i+filainicial,1,4)); 
+                //(primerafila, ultimafila, primeracolumna, ultimacolumna)
+                celda.setCellValue(String.valueOf(modelo.getValueAt(i, 0)));
+                
+                //Celda Código (IMPORTANTE: Considerar las columnas que abarca la celda combinada anterior)
+                celda = fila.getCell(5);
+                celda.setCellValue(String.valueOf(modelo.getValueAt(i, 1)));
+                
+                //Celda Sección
+                celda = fila.getCell(6);
+                celda.setCellValue(String.valueOf(modelo.getValueAt(i, 2)));
+                
+                //Celda Número de Estudiantes
+                celda = fila.getCell(7);
+                celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(i, 3))));
+            }*/
+            entrada.close(); //Cerrando el FileInputStream
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ListClases.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ListClases.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return libro;
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Abigail Sanchez", "45897212", "90", "0", "0"},
+                {"Arnold Polanco", "36363636", "75", "6", "9"},
+                {"Astrid", "45897212", "90", "0", "0"},
+                {"Bayron", "20018920", "62", "24", "4"},
+                {"Brenedin", "20162920", "84", "6", "0"},
+                {"Brenedin Gomez", "94949494", "78", "12", "0"},
+                {"Elena", "45897212", "79", "9", "2"},
+                {"Fernando", "45897212", "87", "3", "0"},
+                {"Fredy", "20192038", "65", "21", "4"},
+                {"Jose", "42123456", "89", "0", "1"},
+                {"Juan Perez", "24895641", "90", "0", "0"},
+                {"Paola Garcia", "48484848", "83", "6", "1"},
+                {"Pedro Cruz", "45897212", "83", "6", "1"},
+                {"Ramon", "20182937", "77", "12", "1"},
+                {"Roberto", "65556464", "72", "18", "0"},
+                {"Santiago", "20172016", "87", "3", "0"},
+                {"Selvin", "56457620", "85", "3", "2"},
+                {"Sergio Vasquez", "58685858", "74", "15", "1"},
+                {"Teresa", "20192020", "70", "15", "5"},
+                {"Yorleny Ramos", "25252525", "87", "3", null}
+            },
+            new String [] {
+                "Nombre", "No. Cuenta", "Asistencias", "Faltas", "Excusas"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(81, 152, 224));
+        jLabel1.setText("Seleccione la clase de la cual desea obtener un resumen:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jButton1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jButton1.setText("Generar Resumen");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jButton1)
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        file = new JFileChooser();
+        file.showSaveDialog(this);
+        File guardar = file.getSelectedFile();
+        if(guardar!=null){
+            XSSFWorkbook aqui = crear_libro();
+            FileOutputStream fileOuS;
+            try {
+                if(guardar.getPath().contains("xlsx")){
+                     fileOuS= new FileOutputStream(guardar);
+                }else{
+                    fileOuS= new FileOutputStream(guardar+".xlsx");
+                }
+                
+                if (guardar.exists()) {// si el archivo existe se elimina
+                    guardar.delete();
+                    System.out.println("Archivo eliminado");
+		}
+		aqui.write(fileOuS);
+		fileOuS.flush();
+		fileOuS.close();
+		JOptionPane.showMessageDialog(this,"Informe generado con éxito");                
+            } catch (IOException ex) {
+                System.out.println("Error");
+            }
+        }
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ResumenPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ResumenPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ResumenPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ResumenPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ResumenPeriodo().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    // End of variables declaration//GEN-END:variables
+}

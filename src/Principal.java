@@ -27,6 +27,7 @@ public class Principal extends javax.swing.JFrame {
     ListClases ListadeClases;
     InfDiario InformeDiario;
     EstuFaltas EstudianteFaltas;
+    ResumenPeriodo resumenperiodo;
     Informe ventinfo;
     Agg_seccion ventagregar_s;
     cambiar contrasena;
@@ -531,6 +532,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         // TODO add your handling code here:
+        resumenperiodo = new ResumenPeriodo();
+        resumenperiodo.setVisible(true);
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
