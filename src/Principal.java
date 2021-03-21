@@ -28,6 +28,7 @@ public class Principal extends javax.swing.JFrame {
     InfDiario InformeDiario;
     EstuFaltas EstudianteFaltas;
     ResumenPeriodo resumenperiodo;
+    ResumenParcial resumenparcial;
     Informe ventinfo;
     Agg_seccion ventagregar_s;
     cambiar contrasena;
@@ -193,7 +194,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(42, 126, 211));
-        jLabel14.setText("Resumen de Asistencia Parcial por Estudiante");
+        jLabel14.setText("Resumen de Asistencia del Período por Estudiante");
         jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel14MouseClicked(evt);
@@ -202,7 +203,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(42, 126, 211));
-        jLabel15.setText("Resumen de Asistencia del Período por Estudiante");
+        jLabel15.setText("Resumen de Asistencia Parcial por Estudiante");
         jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel15MouseClicked(evt);
@@ -220,9 +221,9 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addGap(213, 213, 213))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel13))
                         .addGap(230, 230, 230))))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,8 +240,8 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(291, 291, 291)
                         .addComponent(jLabel12))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(jLabel14)))
+                        .addGap(257, 257, 257)
+                        .addComponent(jLabel15)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -538,6 +539,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         // TODO add your handling code here:
+        resumenparcial = new ResumenParcial();
+        resumenparcial.setVisible(true);
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
