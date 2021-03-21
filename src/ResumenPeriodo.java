@@ -37,12 +37,8 @@ public class ResumenPeriodo extends javax.swing.JFrame {
     XSSFSheet sheet;
     XSSFRow fila;
     XSSFCell celda;
-    List<XSSFTable> listatablas;
-    XSSFTable tabla;
     CellStyle style;
-    CellReference celdai;
-    CellReference celdaf;
-    AreaReference area;
+    
     
     File abrir;
     JFileChooser file;
@@ -72,36 +68,34 @@ public class ResumenPeriodo extends javax.swing.JFrame {
             style.setBorderLeft(BorderStyle.THIN);
             style.setBorderRight(BorderStyle.THIN);
             
-            //cargando tabla
-            listatablas = sheet.getTables();
-            tabla = listatablas.get(0);
-            
-            //Escribiendo el contenido de la tabla en el documento
-            
             //Escribiendo la fecha
             /*fila = sheet.getRow(6);
             celda = fila.getCell(6);
             celda.setCellValue("Fecha: " + hoy.toString());*/
            
-            //Llenando la primera fila
             fila = sheet.createRow(9);
+            //Aplicando estilo a celdas
+            for(int j=1; j<7; j++){
+                celda = fila.createCell(j);
+                celda.setCellStyle(style);
+            }
             //No.
-            celda = fila.createCell(1);
+            celda = fila.getCell(1);
             celda.setCellValue(1);
             //Nombre
-            celda = fila.createCell(2);
+            celda = fila.getCell(2);
             celda.setCellValue(String.valueOf(modelo.getValueAt(0, 0)));
             //No. Cuenta
-            celda = fila.createCell(3);
+            celda = fila.getCell(3);
             celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(0, 1))));
             //Asistencias
-            celda = fila.createCell(4);
+            celda = fila.getCell(4);
             celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(0, 2))));            
             //Inasistencias
-            celda = fila.createCell(5);
+            celda = fila.getCell(5);
             celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(0, 3))));
             //Excusas
-            celda = fila.createCell(6);
+            celda = fila.getCell(6);
             celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(0, 4))));           
             
             //Creando el resto de filas
@@ -109,38 +103,36 @@ public class ResumenPeriodo extends javax.swing.JFrame {
                 filainicial = 9; 
                 fila = sheet.createRow(i+filainicial);
                 
+                //Aplicando estilo a celdas
+                for(int j=1; j<7; j++){
+                    celda = fila.createCell(j);
+                    celda.setCellStyle(style);
+                }
+                
                 //No.
-                celda = fila.createCell(1);
+                celda = fila.getCell(1);
                 celda.setCellValue(i+1);
                 
                 //Nombre
-                celda = fila.createCell(2);
+                celda = fila.getCell(2);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 0)));
                 
                 //No.Cuenta
-                celda = fila.createCell(3);
+                celda = fila.getCell(3);
                 celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(i, 1))));
                 
                 //Asistencias
-                celda = fila.createCell(4);
+                celda = fila.getCell(4);
                 celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(i, 2))));
                 
                 //Inasistencias
-                celda = fila.createCell(5);
+                celda = fila.getCell(5);
                 celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(i, 3))));
                 
                 //Excusas
-                celda = fila.createCell(6);
+                celda = fila.getCell(6);
                 celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(i, 4))));
-            }
-            //Definiendo el tamaño de la tabla
-            celdai = new CellReference(8,1);
-            celdaf = new CellReference(8+modelo.getRowCount(),6);
-            area  = new AreaReference(celdai, celdaf, SpreadsheetVersion.EXCEL2007);
-            tabla.setArea(area);
-            tabla.updateReferences();
-            tabla.updateHeaders();
-            
+            } 
             entrada.close(); //Cerrando el FileInputStream
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ListClases.class.getName()).log(Level.SEVERE, null, ex);
