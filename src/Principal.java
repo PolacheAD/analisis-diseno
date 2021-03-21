@@ -29,6 +29,7 @@ public class Principal extends javax.swing.JFrame {
     EstuFaltas EstudianteFaltas;
     ResumenPeriodo resumenperiodo;
     ResumenParcial resumenparcial;
+    ListadoSemanal listadosemanal;
     Informe ventinfo;
     Agg_seccion ventagregar_s;
     cambiar contrasena;
@@ -185,7 +186,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(42, 126, 211));
-        jLabel13.setText("Listado de Asistencia de la Asignatura (por período)");
+        jLabel13.setText("Listado de Asistencia de la Asignatura (por semana)");
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel13MouseClicked(evt);
@@ -529,6 +530,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         // TODO add your handling code here:
+        listadosemanal = new ListadoSemanal();
+        listadosemanal.setVisible(true);
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked

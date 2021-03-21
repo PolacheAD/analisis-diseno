@@ -50,6 +50,7 @@ public class ResumenPeriodo extends javax.swing.JFrame {
      */
     public ResumenPeriodo() {
         initComponents();
+        jPanel2.setVisible(false);
     }
     
     public XSSFWorkbook crear_libro(){
@@ -151,62 +152,16 @@ public class ResumenPeriodo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Abigail Sanchez", "45897212", "90", "0", "0"},
-                {"Arnold Polanco", "36363636", "75", "6", "9"},
-                {"Astrid", "45897212", "90", "0", "0"},
-                {"Bayron", "20018920", "62", "24", "4"},
-                {"Brenedin", "20162920", "84", "6", "0"},
-                {"Brenedin Gomez", "94949494", "78", "12", "0"},
-                {"Elena", "45897212", "79", "9", "2"},
-                {"Fernando", "45897212", "87", "3", "0"},
-                {"Fredy", "20192038", "65", "21", "4"},
-                {"Jose", "42123456", "89", "0", "1"},
-                {"Juan Perez", "24895641", "90", "0", "0"},
-                {"Paola Garcia", "48484848", "83", "6", "1"},
-                {"Pedro Cruz", "45897212", "83", "6", "1"},
-                {"Ramon", "20182937", "77", "12", "1"},
-                {"Roberto", "65556464", "72", "18", "0"},
-                {"Santiago", "20172016", "87", "3", "0"},
-                {"Selvin", "56457620", "85", "3", "2"},
-                {"Sergio Vasquez", "58685858", "74", "15", "1"},
-                {"Teresa", "20192020", "70", "15", "5"},
-                {"Yorleny Ramos", "25252525", "87", "3", "0"}
-            },
-            new String [] {
-                "Nombre", "No. Cuenta", "Asistencias", "Faltas", "Excusas"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -256,25 +211,65 @@ public class ResumenPeriodo extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Abigail Sanchez", "45897212", "90", "0", "0"},
+                {"Arnold Polanco", "36363636", "75", "6", "9"},
+                {"Astrid", "45897212", "90", "0", "0"},
+                {"Bayron", "20018920", "62", "24", "4"},
+                {"Brenedin", "20162920", "84", "6", "0"},
+                {"Brenedin Gomez", "94949494", "78", "12", "0"},
+                {"Elena", "45897212", "79", "9", "2"},
+                {"Fernando", "45897212", "87", "3", "0"},
+                {"Fredy", "20192038", "65", "21", "4"},
+                {"Jose", "42123456", "89", "0", "1"},
+                {"Juan Perez", "24895641", "90", "0", "0"},
+                {"Paola Garcia", "48484848", "83", "6", "1"},
+                {"Pedro Cruz", "45897212", "83", "6", "1"},
+                {"Ramon", "20182937", "77", "12", "1"},
+                {"Roberto", "65556464", "72", "18", "0"},
+                {"Santiago", "20172016", "87", "3", "0"},
+                {"Selvin", "56457620", "85", "3", "2"},
+                {"Sergio Vasquez", "58685858", "74", "15", "1"},
+                {"Teresa", "20192020", "70", "15", "5"},
+                {"Yorleny Ramos", "25252525", "87", "3", "0"}
+            },
+            new String [] {
+                "Nombre", "No. Cuenta", "Asistencias", "Faltas", "Excusas"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(70, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
