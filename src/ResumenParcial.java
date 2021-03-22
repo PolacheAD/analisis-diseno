@@ -51,7 +51,7 @@ public class ResumenParcial extends javax.swing.JFrame {
         hoy = LocalDate.now();
         
         //plantilla del archivo
-        abrir = new File("C:\\Users\\Sergio\\Desktop\\PlantillasExcel_ProyectoA&D\\ResParc.xlsx");
+        abrir = new File("C:\\Plantillas\\ResParc.xlsx");
         try (FileInputStream entrada = new FileInputStream(abrir)){
             libro= new XSSFWorkbook(entrada);
             sheet = libro.getSheetAt(0);

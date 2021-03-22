@@ -71,7 +71,7 @@ public class InfDiario extends javax.swing.JFrame {
         hoy = LocalDate.now();
         
         //plantilla del archivo
-        abrir = new File("C:\\Users\\Sergio\\Desktop\\PlantillasExcel_ProyectoA&D\\ResDiario.xlsx");
+        abrir = new File("C:\\Plantillas\\ResDiario.xlsx");
         try (FileInputStream entrada = new FileInputStream(abrir)){
             libro= new XSSFWorkbook(entrada);
             sheet = libro.getSheetAt(0);

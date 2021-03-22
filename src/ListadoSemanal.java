@@ -97,7 +97,7 @@ public class ListadoSemanal extends javax.swing.JFrame {
     public XSSFWorkbook crear_libro(){
         defsemana();
         //plantilla del archivo
-        abrir = new File("C:\\Users\\Sergio\\Desktop\\PlantillasExcel_ProyectoA&D\\AsistenciaAsigSemana.xlsx");
+        abrir = new File("C:\\Plantillas\\AsistenciaAsigSemana.xlsx");
         try (FileInputStream entrada = new FileInputStream(abrir)){
             libro= new XSSFWorkbook(entrada);
             sheet = libro.getSheetAt(0);
