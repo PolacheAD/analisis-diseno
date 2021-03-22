@@ -56,6 +56,7 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1.add(asistencia);
         jDesktopPane1.add(ventinfo);
         jDesktopPane1.add(ventagregar_s);
+        jPanel3.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -520,11 +521,13 @@ public class Principal extends javax.swing.JFrame {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
         jPanel2.setVisible(false);
+        jPanel3.setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
         // TODO add your handling code here:
         jPanel2.setVisible(true);
+        jPanel3.setVisible(false);
     }//GEN-LAST:event_jLabel9MouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
