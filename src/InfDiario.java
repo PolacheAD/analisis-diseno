@@ -43,6 +43,7 @@ public class InfDiario extends javax.swing.JFrame {
     int filainicial;
     int asistencia;
     int inasistencia;
+    
     /**
      * Creates new form NewJFrame
      */
@@ -50,17 +51,30 @@ public class InfDiario extends javax.swing.JFrame {
         initComponents();
         hoy = LocalDate.now();
         jTextField2.setText(hoy.toString());
+        modelo = (DefaultTableModel) jTable1.getModel();
+        contarN();
+    }
+    
+    public void contarN() {
+        inasistencia = 0;
+        for(int i=0; i<modelo.getRowCount();i++){
+                if ( String.valueOf(jTable1.getModel().getValueAt(i, 2)).equals("N") ) {
+                    inasistencia = inasistencia + 1;
+                }
+            }
+        jTextField3.setText(String.valueOf(inasistencia));
+        
+        inasistencia = 0;
     }
     
     public XSSFWorkbook crear_libro(){
         hoy = LocalDate.now();
         
         //plantilla del archivo
-        abrir = new File("C:\\Users\\Sergio\\Desktop\\ResDiario.xlsx");
+        abrir = new File("C:\\Users\\Sergio\\Desktop\\PlantillasExcel_ProyectoA&D\\ResDiario.xlsx");
         try (FileInputStream entrada = new FileInputStream(abrir)){
             libro= new XSSFWorkbook(entrada);
             sheet = libro.getSheetAt(0);
-            modelo = (DefaultTableModel) jTable1.getModel();
             //Estilo de celda
             style = libro.createCellStyle();
             style.setBorderTop(BorderStyle.THIN);
@@ -71,21 +85,17 @@ public class InfDiario extends javax.swing.JFrame {
             //Escribiendo el contenido de la tabla en el documento
             
             //Escribiendo la fecha
-            fila = sheet.getRow(6);
-            celda = fila.getCell(7);
-            celda.setCellValue("Fecha: " + hoy.toString());
-            
-            fila = sheet.getRow(33);
-            celda = fila.getCell(7);
-            celda.setCellValue("Fecha: " + hoy.toString());
-            
-            fila = sheet.getRow(7);
-            celda = fila.getCell(1);
-            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
-            
-            fila = sheet.getRow(37);
+            fila = sheet.getRow(9);
             celda = fila.getCell(2);
             celda.setCellValue("Fecha: " + hoy.toString());
+            
+            fila = sheet.getRow(36);
+            celda = fila.getCell(1);
+            celda.setCellValue("Fecha: " + hoy.toString());
+            
+            fila = sheet.getRow(6);
+            celda = fila.getCell(1);
+            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
             
             //Obtener Asistencias e Inasistencias
             asistencia = 0;
@@ -99,12 +109,12 @@ public class InfDiario extends javax.swing.JFrame {
                 }
             }
             
-            fila = sheet.getRow(11); 
-            celda = fila.getCell(4);
+            fila = sheet.getRow(10); 
+            celda = fila.getCell(3);
             celda.setCellValue(Double.parseDouble(String.valueOf(asistencia)));
             
-            fila = sheet.getRow(12);
-            celda = fila.getCell(4);
+            fila = sheet.getRow(11);
+            celda = fila.getCell(3);
             celda.setCellValue(Double.parseDouble(String.valueOf(inasistencia)));
             
             //Modificando la tabla de Inasistentes
@@ -114,24 +124,24 @@ public class InfDiario extends javax.swing.JFrame {
                 if ( String.valueOf(jTable1.getModel().getValueAt(i, 2)).equals("N") ) {
                     fila = sheet.createRow(cont+filainicial);
                     //Aplicando estilo a celdas
-                    for(int j=2; j<7; j++){
+                    for(int j=1; j<5; j++){
                         celda = fila.createCell(j);
                         celda.setCellStyle(style);
                     }
                     //Celda No.
-                    celda = fila.getCell(2);
+                    celda = fila.getCell(1);
                     celda.setCellValue(i+1);
 
                     //Celda Nombre de Alumno
-                    celda = fila.getCell(3);
+                    celda = fila.getCell(2);
                     //Combinar celdas
-                    sheet.addMergedRegion(new CellRangeAddress(cont+filainicial,cont+filainicial,3,4)); 
+                    sheet.addMergedRegion(new CellRangeAddress(cont+filainicial,cont+filainicial,2,3)); 
                     //(primerafila, ultimafila, primeracolumna, ultimacolumna)
                
                     celda.setCellValue(String.valueOf(modelo.getValueAt(i, 0)));
                     
                      //Celda NumeroCuenta (IMPORTANTE: Considerar las columnas que abarca la celda combinada anterior)
-                    celda = fila.getCell(5);
+                    celda = fila.getCell(4);
                     sheet.addMergedRegion(new CellRangeAddress(cont+filainicial,cont+filainicial,5,6));
                     celda.setCellValue(String.valueOf(modelo.getValueAt(i, 1)));
                     cont++;
@@ -200,7 +210,7 @@ public class InfDiario extends javax.swing.JFrame {
 
         jTextField4.setEditable(false);
         jTextField4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jTextField4.setText("5");
+        jTextField4.setText("3");
 
         jLabel2.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(81, 152, 224));
@@ -218,7 +228,7 @@ public class InfDiario extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(81, 152, 224));
-        jLabel3.setText("Asignatura");
+        jLabel3.setText("Clase:");
 
         jLabel7.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(81, 152, 224));

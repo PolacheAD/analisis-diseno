@@ -57,7 +57,7 @@ public class ResumenPeriodo extends javax.swing.JFrame {
         hoy = LocalDate.now();
         
         //plantilla del archivo
-        abrir = new File("E:\\U\\analisis y diseño\\Proyecto\\ResPer.xlsx");
+        abrir = new File("C:\\Users\\Sergio\\Desktop\\PlantillasExcel_ProyectoA&D\\ResPer.xlsx");
         try (FileInputStream entrada = new FileInputStream(abrir)){
             libro= new XSSFWorkbook(entrada);
             sheet = libro.getSheetAt(0);
@@ -169,7 +169,7 @@ public class ResumenPeriodo extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(81, 152, 224));
         jLabel1.setText("Seleccione la clase de la cual desea obtener un resumen:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Instalaciones Electricas" }));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N

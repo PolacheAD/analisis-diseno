@@ -1,3 +1,6 @@
+
+import java.time.LocalDate;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +12,16 @@
  * @author Arnold
  */
 public class EstuFaltas extends javax.swing.JFrame {
-
+    
+    LocalDate hoy;
     /**
      * Creates new form EstuFaltas
      */
     public EstuFaltas() {
         initComponents();
+        hoy = LocalDate.now();
+        jLabel7.setText("Fecha: " + hoy.toString());
+        
     }
 
     /**
@@ -54,26 +61,9 @@ public class EstuFaltas extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 11)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {"Astrid", "45897212", "15"},
+                {"Santiago", "20172016", "20"},
+                {"Selvin", "56457620", "17"}
             },
             new String [] {
                 "Nombre del Estudiante", "Cuenta", "Faltas"
@@ -98,6 +88,7 @@ public class EstuFaltas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jComboBox1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Instalaciones Electricas" }));
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
@@ -106,7 +97,7 @@ public class EstuFaltas extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(81, 152, 224));
-        jLabel3.setText("Asignatura");
+        jLabel3.setText("Clase:");
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagen/logo3.png"))); // NOI18N
 

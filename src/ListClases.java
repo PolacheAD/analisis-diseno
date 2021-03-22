@@ -50,7 +50,7 @@ public class ListClases extends javax.swing.JFrame {
         hoy = LocalDate.now();
         
         //plantilla del archivo
-        abrir = new File("C:\\Users\\Sergio\\Desktop\\ListClases.xlsx");
+        abrir = new File("C:\\Users\\Sergio\\Desktop\\PlantillasExcel_ProyectoA&D\\ListClases.xlsx");
         try (FileInputStream entrada = new FileInputStream(abrir)){
             libro= new XSSFWorkbook(entrada);
             sheet = libro.getSheetAt(0);
@@ -64,17 +64,12 @@ public class ListClases extends javax.swing.JFrame {
             
             //Escribiendo el contenido de la tabla en el documento
             
-            //Escribiendo la fecha
-            fila = sheet.getRow(6);
-            celda = fila.getCell(6);
-            celda.setCellValue("Fecha: " + hoy.toString());
-            
             //Modificando la tabla
             for(int i=0; i<modelo.getRowCount();i++){
-                filainicial = 10; //Primera fila de registros de la tabla de excel
+                filainicial = 9; //Primera fila de registros de la tabla de excel
                 fila = sheet.getRow(i+filainicial);
                 //Aplicando estilo a celdas
-                for(int j=0; j<8; j++){
+                for(int j=0; j<5; j++){
                     celda = fila.getCell(j);
                     celda.setCellStyle(style);
                 }
@@ -84,21 +79,18 @@ public class ListClases extends javax.swing.JFrame {
                 
                 //Celda Nombre de la Clase
                 celda = fila.getCell(1);
-                //Combinar celdas
-                sheet.addMergedRegion(new CellRangeAddress(i+filainicial,i+filainicial,1,4)); 
-                //(primerafila, ultimafila, primeracolumna, ultimacolumna)
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 0)));
                 
                 //Celda Código (IMPORTANTE: Considerar las columnas que abarca la celda combinada anterior)
-                celda = fila.getCell(5);
+                celda = fila.getCell(2);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 1)));
                 
                 //Celda Sección
-                celda = fila.getCell(6);
+                celda = fila.getCell(3);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 2)));
                 
                 //Celda Número de Estudiantes
-                celda = fila.getCell(7);
+                celda = fila.getCell(4);
                 celda.setCellValue(Double.parseDouble(String.valueOf(modelo.getValueAt(i, 3))));
             }
             entrada.close(); //Cerrando el FileInputStream
