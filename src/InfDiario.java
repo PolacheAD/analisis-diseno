@@ -120,7 +120,7 @@ public class InfDiario extends javax.swing.JFrame {
             //Modificando la tabla de Inasistentes
             int cont = 0;
             for(int i=0; i<modelo.getRowCount();i++){
-                filainicial = 39; //Primera fila de registros de la tabla de excel
+                filainicial = 45; //Primera fila de registros de la tabla de excel
                 if ( String.valueOf(jTable1.getModel().getValueAt(i, 2)).equals("N") ) {
                     fila = sheet.createRow(cont+filainicial);
                     //Aplicando estilo a celdas
