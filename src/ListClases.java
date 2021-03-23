@@ -50,7 +50,7 @@ public class ListClases extends javax.swing.JFrame {
         hoy = LocalDate.now();
         
         //plantilla del archivo
-        abrir = new File("C:\\Plantilla\\ListClases.xlsx");
+        abrir = new File("C:\\Plantillas\\ListClases.xlsx");
         try (FileInputStream entrada = new FileInputStream(abrir)){
             libro= new XSSFWorkbook(entrada);
             sheet = libro.getSheetAt(0);
