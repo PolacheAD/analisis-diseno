@@ -12,9 +12,13 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.xssf.usermodel.DefaultIndexedColorMap;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFColor;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -34,12 +38,12 @@ public class ListadoSemanal extends javax.swing.JFrame {
     XSSFSheet sheet;
     XSSFRow fila;
     XSSFCell celda;
-    CellStyle style;
+    XSSFCellStyle style, styleN, styleS, styleX;
+    XSSFColor rojo, verde, gris;
     LocalDate fecha, lunes, sabado;
     java.util.Date fecha_cal;
     java.sql.Date fecha_sql;
     int diasemana;
-    
     File abrir;
     JFileChooser file;
     DefaultTableModel modelo;
@@ -55,7 +59,6 @@ public class ListadoSemanal extends javax.swing.JFrame {
         hoy = Date.valueOf(LocalDate.now());
         jDateChooser1.setDateFormatString("yyyy-MM-dd");
         jDateChooser1.setDate(hoy);
-        
         jPanel2.setVisible(false);
         
         
@@ -94,12 +97,27 @@ public class ListadoSemanal extends javax.swing.JFrame {
         }
     }
     
+    public void asigStyle(XSSFCell col, XSSFCellStyle si, XSSFCellStyle no, XSSFCellStyle cross){
+        if(col.getStringCellValue().equals("S")){
+            col.setCellStyle(si);
+        }
+        if(col.getStringCellValue().equals("N")){
+            col.setCellStyle(no);
+        }
+        if(col.getStringCellValue().equals("X")){
+            col.setCellStyle(cross);
+        }
+    }
+    
     public XSSFWorkbook crear_libro(){
         defsemana();
         //plantilla del archivo
         abrir = new File("C:\\Plantillas\\AsistenciaAsigSemana.xlsx");
         try (FileInputStream entrada = new FileInputStream(abrir)){
             libro= new XSSFWorkbook(entrada);
+            verde = new XSSFColor(new java.awt.Color(164,218,179),null);
+            rojo = new XSSFColor(new java.awt.Color(255,128,128),null);
+            gris = new XSSFColor(new java.awt.Color(217,217,217),null);
             sheet = libro.getSheetAt(0);
             modelo = (DefaultTableModel) jTable1.getModel();
             //Estilo de celda
@@ -108,6 +126,25 @@ public class ListadoSemanal extends javax.swing.JFrame {
             style.setBorderBottom(BorderStyle.THIN);
             style.setBorderLeft(BorderStyle.THIN);
             style.setBorderRight(BorderStyle.THIN);
+            
+            //Estilo de celda "S"
+            styleS = libro.createCellStyle();
+            styleS.cloneStyleFrom(style);
+            styleS.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            styleS.setFillForegroundColor(verde);
+            
+            //Estilo de celda "N"
+            styleN = libro.createCellStyle();
+            styleN.cloneStyleFrom(style);
+            styleN.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            styleN.setFillForegroundColor(rojo);
+            
+            
+            //Estilo de celda "X"
+            styleX = libro.createCellStyle();
+            styleX.cloneStyleFrom(style);
+            styleX.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            styleX.setFillForegroundColor(gris.getIndex());
             
             //Escribiendo la fecha
             /*fila = sheet.getRow(6);
@@ -141,31 +178,38 @@ public class ListadoSemanal extends javax.swing.JFrame {
                 //Lu
                 celda = fila.getCell(2);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 2)));
+                asigStyle(celda, styleS, styleN, styleX);
                 
                 //Ma
                 celda = fila.getCell(3);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 3)));
+                asigStyle(celda, styleS, styleN, styleX);
                 
                 //Mi
                 celda = fila.getCell(4);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 4)));
+                asigStyle(celda, styleS, styleN, styleX);
                 
                 //Ju
                 celda = fila.getCell(5);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 5)));
+                asigStyle(celda, styleS, styleN, styleX);
                 
                 //Vi
                 celda = fila.getCell(6);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 6)));
+                asigStyle(celda, styleS, styleN, styleX);
                 
                 //Sa
                 celda = fila.getCell(7);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 7)));
+                asigStyle(celda, styleS, styleN, styleX);
                 
                 //Faltas
                 celda = fila.getCell(8);
                 celda.setCellValue(String.valueOf(modelo.getValueAt(i, 8)));
             }
+            
             fila = sheet.createRow(filainicial+modelo.getRowCount()+1);
             celda = fila.createCell(0);
             celda.setCellStyle(style);
