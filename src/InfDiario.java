@@ -95,7 +95,7 @@ public class InfDiario extends javax.swing.JFrame {
             
             fila = sheet.getRow(6);
             celda = fila.getCell(1);
-            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
+            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()) + " | " + hoy.toString());
             
             //Obtener Asistencias e Inasistencias
             asistencia = 0;
