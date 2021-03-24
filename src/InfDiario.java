@@ -93,9 +93,10 @@ public class InfDiario extends javax.swing.JFrame {
             celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
             celda = fila.getCell(3);
             celda.setCellValue("Fecha: " + hoy.toString());
+            
             fila = sheet.getRow(41);
             celda = fila.getCell(0);
-            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()) + " | " + hoy.toString());
+            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
             celda = fila.getCell(3);
             celda.setCellValue("Fecha: " + hoy.toString());
             
