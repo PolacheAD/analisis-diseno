@@ -74,7 +74,13 @@ public class ResumenPeriodo extends javax.swing.JFrame {
             celda = fila.getCell(6);
             celda.setCellValue("Fecha: " + hoy.toString());*/
            
-            fila = sheet.createRow(9);
+            fila = sheet.getRow(6);
+            celda = fila.getCell(0);
+            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
+            celda = fila.getCell(8);
+            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
+            
+            fila = sheet.createRow(10);
             //Aplicando estilo a celdas
             for(int j=1; j<7; j++){
                 celda = fila.createCell(j);
@@ -101,7 +107,7 @@ public class ResumenPeriodo extends javax.swing.JFrame {
             
             //Creando el resto de filas
             for(int i=1; i<modelo.getRowCount();i++){
-                filainicial = 9; 
+                filainicial = 10; 
                 fila = sheet.createRow(i+filainicial);
                 
                 //Aplicando estilo a celdas

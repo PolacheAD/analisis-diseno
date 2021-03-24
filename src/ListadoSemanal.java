@@ -150,9 +150,12 @@ public class ListadoSemanal extends javax.swing.JFrame {
             /*fila = sheet.getRow(6);
             celda = fila.getCell(6);
             celda.setCellValue("Fecha: " + hoy.toString());*/
+            fila = sheet.getRow(8);
+            celda = fila.getCell(1);
+            celda.setCellValue("Catedrático: Brénedin Enrique Núñez");
             
             //Escribiendo la semana
-            fila = sheet.getRow(7);
+            fila = sheet.getRow(6);
             celda = fila.getCell(0);
             celda.setCellValue("Semana del Lunes "+lunes.toString()+" al Sábado "+sabado.toString());
             
@@ -249,6 +252,7 @@ public class ListadoSemanal extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -302,7 +306,7 @@ public class ListadoSemanal extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(81, 152, 224));
         jLabel2.setText("(Año-Mes-Día)");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Instalaciones Electricas para IS-2000", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Instalaciones Electricas para IS-2000", " " }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);

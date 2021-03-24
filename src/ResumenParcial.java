@@ -66,15 +66,21 @@ public class ResumenParcial extends javax.swing.JFrame {
             //Escribiendo la clase
             fila = sheet.getRow(4);
             celda = fila.getCell(0);
-            celda.setCellValue("Resumen de Asistencia en el Parcial por Estudiante - " + String.valueOf(jComboBox1.getSelectedItem()));
+            celda.setCellValue("Resumen de Asistencia en el Parcial por Estudiante");
+            
+            fila = sheet.getRow(6);
+            celda = fila.getCell(0);
+            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
+            celda = fila.getCell(8);
+            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
             
             //Escribiendo la fechas
-            fila = sheet.getRow(6);
+            fila = sheet.getRow(7);
             celda = fila.getCell(1);
             celda.setCellValue("Parcial (" + jTextField1.getText() + " / " + jTextField2.getText() +")");
            
             //Llenando la primera fila
-            fila = sheet.createRow(9);
+            fila = sheet.createRow(10);
             //Aplicando estilo a celdas
             for(int j=1; j<7; j++){
                 celda = fila.createCell(j);
@@ -101,7 +107,7 @@ public class ResumenParcial extends javax.swing.JFrame {
             
             //Creando el resto de filas
             for(int i=1; i<modelo.getRowCount();i++){
-                filainicial = 9; 
+                filainicial = 10; 
                 fila = sheet.createRow(i+filainicial);
                 
                 //Aplicando estilo a celdas

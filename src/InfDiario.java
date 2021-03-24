@@ -84,18 +84,21 @@ public class InfDiario extends javax.swing.JFrame {
             
             //Escribiendo el contenido de la tabla en el documento
             
-            //Escribiendo la fecha
-            fila = sheet.getRow(9);
-            celda = fila.getCell(2);
-            celda.setCellValue("Fecha: " + hoy.toString());
-            
-            fila = sheet.getRow(36);
+            fila = sheet.getRow(43);
             celda = fila.getCell(1);
             celda.setCellValue("Fecha: " + hoy.toString());
             
-            fila = sheet.getRow(6);
-            celda = fila.getCell(1);
+            fila = sheet.getRow(7);
+            celda = fila.getCell(0);
+            celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()));
+            celda = fila.getCell(3);
+            celda.setCellValue("Fecha: " + hoy.toString());
+            fila = sheet.getRow(41);
+            celda = fila.getCell(0);
             celda.setCellValue(String.valueOf(jComboBox1.getSelectedItem()) + " | " + hoy.toString());
+            celda = fila.getCell(3);
+            celda.setCellValue("Fecha: " + hoy.toString());
+            
             
             //Obtener Asistencias e Inasistencias
             asistencia = 0;
@@ -120,7 +123,7 @@ public class InfDiario extends javax.swing.JFrame {
             //Modificando la tabla de Inasistentes
             int cont = 0;
             for(int i=0; i<modelo.getRowCount();i++){
-                filainicial = 45; //Primera fila de registros de la tabla de excel
+                filainicial = 46; //Primera fila de registros de la tabla de excel
                 if ( String.valueOf(jTable1.getModel().getValueAt(i, 2)).equals("N") ) {
                     fila = sheet.createRow(cont+filainicial);
                     //Aplicando estilo a celdas
@@ -176,7 +179,6 @@ public class InfDiario extends javax.swing.JFrame {
         Boton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -206,7 +208,7 @@ public class InfDiario extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Leelawadee UI Semilight", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(81, 152, 224));
-        jLabel1.setText("Informe Diario");
+        jLabel1.setText("Listado/Resumen Diario");
 
         jTextField4.setEditable(false);
         jTextField4.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
@@ -233,16 +235,6 @@ public class InfDiario extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(81, 152, 224));
         jLabel7.setText("Fecha: 13/03/2021");
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(81, 152, 224));
-        jButton1.setText("Enviar a mi Correo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Leelawadee UI Semilight", 0, 14)); // NOI18N
@@ -355,29 +347,6 @@ public class InfDiario extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator1)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Boton1)
-                        .addGap(119, 119, 119)
-                        .addComponent(jButton1)
-                        .addGap(149, 149, 149))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(413, 413, 413)))
-                        .addComponent(jLabel8)
-                        .addGap(39, 39, 39)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(154, 154, 154)
                 .addComponent(jLabel5)
                 .addGap(19, 19, 19)
@@ -412,6 +381,28 @@ public class InfDiario extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator1)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(413, 413, 413)))
+                                .addComponent(jLabel8)
+                                .addGap(39, 39, 39))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addComponent(Boton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,9 +445,7 @@ public class InfDiario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(Boton1))
+                .addComponent(Boton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -502,10 +491,6 @@ public class InfDiario extends javax.swing.JFrame {
             }
         }  
     }//GEN-LAST:event_Boton1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
 
@@ -559,7 +544,6 @@ public class InfDiario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Boton1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
